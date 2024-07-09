@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Error Logs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Error Logs</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngIf="!data || data.length == 0">
+    <ion-row class="no-data-row">
+      <ion-col size="1">#</ion-col>
+      <ion-col>No Data</ion-col>
+      <ion-col>No Data</ion-col>
+      <ion-col>No Data</ion-col>
+      <ion-col>No Data</ion-col>
+      <ion-col>
+        <ion-button disabled>Assess</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <!-- Remove ion-grid and wrap each row in an ion-card element -->
+  <ion-card *ngFor="let attribute of data; let i = index" class="data-row-card">
+    <ion-card-content>
+      <ion-row class="header-column">
+        <ion-col size="1">#</ion-col>
+        <ion-col>Serial Number</ion-col>
+        <ion-col>Logged By</ion-col>
+        <ion-col>Error Code</ion-col>
+        <ion-col>Date Logged</ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+
+      <ion-row class="data-column">
+        <ion-col size="1">{{i+1}}</ion-col>
+        <ion-col>{{attribute.assignedPrinter.serialNumber}}</ion-col>
+        <ion-col>{{attribute.clientUser.client.clientName}}</ion-col>
+        <ion-col>{{attribute.errorCode.errorCodeName}}</ion-col>
+        <ion-col>{{attribute.errorLogDate | date:'dd/MM/yyyy'}}</ion-col>
+        <ion-col>
+          <ion-button color="primary" [routerLink]="['/infield-checklist', attribute.errorLogId]">Assess</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

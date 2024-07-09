@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Account</ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+  <div *ngIf="username" class="ion-padding-top ion-text-center">
+    <img *ngIf="Image && Image != null" class="image" [src]="'data:image/png;base64,' + Image" alt="Profile Picture"
+      data-toggle="modal" id="open-modal">
+    <img *ngIf="!Image || Image == null" class="image" src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+    <h2>{{username}}</h2>
+
+    <ion-list inset>
+      <ion-item id="open-modal">Update Picture</ion-item>
+      <ion-item routerLink="/account-update">Update profile</ion-item>
+      <ion-item routerLink="/change-password">Change Password</ion-item>
+      <!-- <ion-item (click)="support()">Support</ion-item> -->
+      <ion-item (click)="logout()">Logout</ion-item>
+    </ion-list>
+  </div>
+
+
+  <ion-content class="ion-padding">
+    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancel</ion-button>
+            </ion-buttons>
+            <ion-title>Profile photo</ion-title>
+            <!-- <ion-buttons slot="end">
+              <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+            </ion-buttons> -->
+          </ion-toolbar>
+        </ion-header>
+        <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <img *ngIf="!base64ImageData && base64ImageData == null && Image && Image != null" class="modalImage"
+              [src]="'data:image/png;base64,' + Image" alt="Profile Picture">
+            <img *ngIf="!base64ImageData && base64ImageData == null && !Image && Image == null"
+              src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+            <img *ngIf="base64ImageData && base64ImageData != null" class="modalImage" [src]="base64ImageData"
+              alt="Profile Picture">
+          </ion-item>
+          <form class="modalFooter">
+            <p>{{fileNameUploaded}}</p>
+            <input class="submitButtons" type="file" id="file" #file placeholder="Choose file"
+              (change)="uploadFile(file.files)" accept="image/*" style="display: none;">
+            <ion-button type="button" mat-stroked-button color="primary" (click)="openFileInput($event)">Update
+              profile Picture</ion-button>
+            <ion-button *ngIf="fileNameUploaded.length > 0" type="button" class="modalButton"
+              (click)="changeProfilePicture()" data-dismiss="modal" color="success">Save</ion-button>
+            <ion-button *ngIf="fileNameUploaded.length == 0" type="reset" fill="outline" color="danger"
+              (click)="removeProfilePicture()" data-dismiss="modal" [disabled]="!Image">Remove picture</ion-button>
+            <ion-button *ngIf="fileNameUploaded.length > 0" type="reset" fill="outline" color="danger"
+              (click)="clearChanges()">Cancel</ion-button>
+          </form>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </ion-content>
+
+</ion-content>

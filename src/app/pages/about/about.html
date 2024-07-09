@@ -1,0 +1,85 @@
+<ion-content>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="presentPopover($event)">
+          <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="about-header">
+    <!-- Instead of loading an image each time the select changes, use opacity to transition them -->
+    <div class="about-image durban" [ngStyle]="location === 'durban' && {'opacity': '1'}"></div>
+    <div class="about-image johannesburg" [ngStyle]="location === 'johannesburg' && {'opacity': '1'}"></div>
+    <div class="about-image capetown" [ngStyle]="location === 'capetown' && {'opacity': '1'}"></div>
+  </div>
+
+  <div class="about-info">
+    <h3 class="ion-padding-top ion-padding-start">About</h3>
+
+    <p class="ion-padding-start ion-padding-end">
+      Altron FinTech ACS is a division of the Altron group, founded in 1993 and will remain function until {{ date |
+      date: 'mediumDate' }}. Their solutions include integrated transaction switching, PCI-DSS certified payment
+      terminals and high-quality card issuance products and services. Altron FinTech ACS’s solutions are tailor made to
+      suit customers’ needs regardless of industry size, assisting customers to grow their businesses. Their main
+      strengths, capabilities and skills lie in the ”always on” compliant, outsourced transaction switching environment.
+      Their cloud-based technology enables customers to issue ID cards and digital tokens remotely.
+    </p>
+
+    <h3 class="ion-padding-top ion-padding-start">Details</h3>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-select label="Location" [(ngModel)]="location" [interfaceOptions]="selectOptions">
+          <ion-select-option value="durban">Durban, KZN</ion-select-option>
+          <ion-select-option value="johannesburg">Johannesburg, GP</ion-select-option>
+          <ion-select-option value="capetown">Cape Town, WP</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item button="true" id="open-date-input">
+        <ion-label>
+          Date
+        </ion-label>
+        <ion-text slot="end">{{ date | date: 'mediumDate' }}</ion-text>
+        <ion-popover id="date-input-popover" trigger="open-date-input" [showBackdrop]="false" side="top"
+          alignment="end">
+          <ng-template>
+            <ion-datetime max="2056" [(ngModel)]="date" presentation="date"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-list>
+
+    <h3 class="ion-padding-top ion-padding-start">Quotes</h3>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label>
+          Author
+        </ion-label>
+        <ion-label class="ion-text-end, author">
+          {{ author }}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label class="ion-text-end, quote">
+          "{{ quote }}"
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-button class="twitter-button" (click)="shareOnTwitter()">
+      <ion-icon name="logo-twitter" class="twitter-icon"></ion-icon>
+      Share on Twitter</ion-button>
+  </div>
+</ion-content>

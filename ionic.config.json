@@ -1,0 +1,7 @@
+{
+  "name": "Stockable",
+  "type": "angular",
+  "integrations": {
+    "capacitor": {}
+  }
+}

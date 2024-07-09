@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Update profile</ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="signin-form">
+    <form [formGroup]="updateForm">
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-input formControlName="userFirstName" type="text" placeholder="First Name" label="First Name" labelPlacement="stacked"
+              spellcheck="false" autocapitalize="off"></ion-input>
+          </ion-item>
+          <ion-note
+            *ngIf="updateForm.get('userFirstName')?.touched && updateForm.get('userFirstName')?.hasError('required')"
+            color="danger">
+            Field cannot be empty.
+          </ion-note>
+          <ion-note
+            *ngIf="updateForm.get('userFirstName')?.invalid && updateForm.get('userFirstName')?.touched && updateForm.get('userFirstName')?.hasError('whitespace')"
+            color="danger">
+            First Name should not contain whitespace.
+          </ion-note>
+
+          <ion-item>
+            <ion-input formControlName="userLastName" type="text" placeholder="Last Name" label="Last Name"
+              labelPlacement="stacked" spellcheck="false" autocapitalize="off"></ion-input>
+          </ion-item>
+          <ion-note
+            *ngIf="updateForm.get('userLastName')?.touched && updateForm.get('userLastName')?.hasError('required')"
+            color="danger">
+            Field cannot be empty.
+          </ion-note>
+          <ion-note
+            *ngIf="updateForm.get('userLastName')?.touched && updateForm.get('userLastName')?.hasError('whitespace')"
+            color="danger">
+            Last Name should not contain whitespace.
+          </ion-note>
+
+          <ion-item>
+            <ion-input formControlName="email" type="email" placeholder="Email" label="Email" labelPlacement="stacked"
+              spellcheck="false" autocapitalize="off"></ion-input>
+          </ion-item>
+          <ion-note *ngIf="updateForm.get('email')?.touched && updateForm.get('email')?.hasError('required')" color="danger">
+            Field cannot be empty.
+          </ion-note>
+          <ion-note *ngIf="updateForm.get('email')?.touched && updateForm.get('email')?.hasError('email')"
+            color="danger">
+            Please enter a valid email address with no spaces.
+          </ion-note>
+
+          <ion-item>
+            <ion-input formControlName="phoneNumber" type="tel" placeholder="Contact Number" label="Contact Number"
+              labelPlacement="stacked" spellcheck="false" autocapitalize="off"></ion-input>
+          </ion-item>
+          <ion-note *ngIf="updateForm.get('phoneNumber')?.touched && updateForm.get('phoneNumber')?.hasError('pattern')"
+            color="danger">
+            Please enter a valid 10-digit number with 0 as the starting digit for the phone number.
+          </ion-note>
+        </ion-card-content>
+
+        <ion-row>
+          <ion-col>
+            <ion-button (click)="updateUser()" type="submit" expand="block"
+              [disabled]="!updateForm.valid">Submit</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="back()" color="light" expand="block">Return</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </form>
+  </div>
+
+</ion-content>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">stockable</string>
+    <string name="title_activity_main">stockable</string>
+    <string name="package_name">stockable.app</string>
+    <string name="custom_url_scheme">stockable.app</string>
+</resources>

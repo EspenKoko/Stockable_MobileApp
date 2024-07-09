@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>In Field Troubleshoot Checklist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="remoteChecklist">
+    <ion-item>
+      <ion-label>Has the printer been restarted?</ion-label>
+      <ion-checkbox formControlName="Restarted"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Is the network cable plugged into the printer?</ion-label>
+      <ion-checkbox formControlName="NetworkCheck"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Has the printer been cleaned?</ion-label>
+      <ion-checkbox formControlName="PrinterCleaned"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Is the indent cartridge still viable?</ion-label>
+      <ion-checkbox formControlName="IndentCatridgeViable"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Is the printing foil still viable?</ion-label>
+      <ion-checkbox formControlName="PrintingFoilViable"></ion-checkbox>
+    </ion-item>
+  </form>
+
+  <ion-button (click)="printerNotFixed()" color="danger" class="ion-button-block">
+    Issue Not Resolved
+  </ion-button>
+
+  <ion-button (click)="printerFixed()" color="success" class="ion-button-block">
+    Issue Resolved
+  </ion-button>
+</ion-content>
+
+<!-- <ion-button class="btnReturn">
+  <ion-label [routerLink]="'/error-logs'">Return</ion-label>
+</ion-button> -->
+
+<!-- <ion-button class="btnError">
+  <ion-label class="btnSubmitText" [routerLink]="'/exchange-printer'">Exchange Printer</ion-label>
+</ion-button> -->

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title *ngIf="!appComponent.loggedIn">Login</ion-title>
+    <ion-title *ngIf="appComponent.loggedIn">Stockable</ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="appComponent.loggedIn">
+    <div class="login-logo">
+      <img src="assets/download.jpeg" alt="Ionic logo">
+    </div>
+
+    <ion-button (click)="navigate()" type="submit" expand="block">Go to home</ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="!appComponent.loggedIn">
+    <div class="login-logo">
+      <img src="assets/download.jpeg" alt="Ionic logo">
+    </div>
+
+    <div class="login-form">
+      <form [formGroup]="loginForm">
+        <ion-input label="Email address" labelPlacement="stacked" fill="solid" formControlName="emailaddress"
+          name="Email" type="text" spellcheck="false" autocapitalize="off" errorText="Email is required" required>
+        </ion-input>
+
+        <ion-input label="Password" labelPlacement="stacked" fill="solid" formControlName="password" name="password"
+          type="password" errorText="Password is required" required>
+        </ion-input>
+
+        <ion-row>
+          <ion-col>
+            <ion-button (click)="onLogin()" type="submit" expand="block"
+              [disabled]="!loginForm.valid">Login</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button routerLink="/forgot-password" color="light" expand="block">FORGOT PASSWORD</ion-button>
+          </ion-col>
+          <!-- <ion-col>
+            <ion-button (click)="testLogin1()" color="light" expand="block">Clerk login</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="testLogin2()" color="light" expand="block">Technician login</ion-button>
+          </ion-col> -->
+        </ion-row>
+      </form>
+    </div>
+  </ion-card>
+
+</ion-content>

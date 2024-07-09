@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Exchange Printer
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content class="card-body">
+      <div class="viewPageBody">
+        <ion-card-title class="lblHeader1">Exchange Printer</ion-card-title>
+        <br>
+        <form #form="ngForm" (ngSubmit)="editBranch()">
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Client:</ion-label>
+              <ion-input type="text" readonly [value]="branchData?.client?.clientName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Branch:</ion-label>
+              <ion-input type="text" readonly [value]="branchData?.branchName"></ion-input>
+            </ion-item>
+            <!-- <ion-item>
+              <ion-label position="stacked">Printer To Exchange:</ion-label>
+              <ion-input type="text" readonly [value]="printerData?"></ion-input>
+            </ion-item> -->
+            <ion-item>
+              <ion-label position="stacked">Printer ID To Exchange:</ion-label>
+              <ion-input type="text" readonly [value]="printerToExchange?.serialNumber "></ion-input>
+            </ion-item>
+          </ion-list>
+          <!-- <ion-button expand="full" [routerLink]="['/infield-checklist', attribute.errorLogId]">Return</ion-button>
+          <ion-col>
+            <ion-button (click)="back()" color="light" expand="block">Return</ion-button>
+          </ion-col> -->
+          <ion-button expand="full" type="submit" [disabled]="!form.valid" (click)="exchange()">Exchange</ion-button>
+        </form>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

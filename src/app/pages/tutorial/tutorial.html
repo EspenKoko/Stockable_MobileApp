@@ -1,0 +1,61 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Skip</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="slide-container">
+    <section class="slide">
+      <img src="assets/img/ica-slidebox-img-1.png" class="slide-image" />
+      <h2 class="slide-title">
+        Welcome to
+        <b>Distinct Solutions Mobile App</b>
+      </h2>
+      <p>
+        The <b>Stockable team's</b> latest creation of the technican interfaces all on a click of a button!
+    </section>
+
+    <section class="slide">
+      <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
+      <h2 class="slide-title">Why on a Mobile App?</h2>
+      <p>
+        <b>Errors</b> are logged constantly by clients, hence technicians need a quick and easy way to do printer checkups and exchanges.
+      </p>
+    </section>
+
+    <section class="slide">
+      <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
+      <h2 class="slide-title">What can you do on the app?</h2>
+      <p>
+        <b>Routing</b> from page to page at a simple click of a button, like this one below!
+      </p>
+
+      <ion-button expand="full" (click)="displayMessage('Button has been pressed, continue to the next tip.')">
+        Submit Button
+      </ion-button>
+    </section>
+
+    <section class="slide">
+      <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
+      <h2 class="slide-title">What can you do on the app?</h2>
+      <p>
+        <b>Checklist</b> of the progress of the current printer that has been logged as an error, example listed below!
+      </p>
+
+      <ion-checkbox *ngFor="let checkbox of checkboxes" [(ngModel)]="checkbox.checked">{{ checkbox.label }}</ion-checkbox>
+      <ion-button (click)="checkCheckboxes()">Submit</ion-button>
+    </section>
+
+    <section class="slide">
+      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
+      <h2 class="slide-title">Ready to Explore?</h2>
+      <ion-button fill="clear" (click)="startApp()">
+        Continue
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </section>
+  </div>
+</ion-content>
